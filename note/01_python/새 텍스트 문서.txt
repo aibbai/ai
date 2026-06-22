@@ -2,3 +2,4 @@ c:/ai/note/01_python/test.txt 저장
 
 수정 후
 수정 후 22
+수정 후 333
