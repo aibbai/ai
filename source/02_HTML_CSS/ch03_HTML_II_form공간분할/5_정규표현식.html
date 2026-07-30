@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        p {
+            text-align: center; /*글씨, 이미지, input 등 가운데 정렬 */
+        }
+    </style>
+</head>
+<body>
+    <!--
+    \d : (숫자와 매치. [0-9]와 동일)
+    \D : (숫자가 아닌 문자)
+    \w : (영문자나 숫자. [a-zA-Z0-9]와 동일)
+    /W : (영문자나 숫자가 아닌 문자)
+    . : (문자)
+    \. : . #문자
+    \s : () #소괄호
+    {n,} : n회 반복
+    {2,4} : 2~4회 반복 #4,2는 안됨 (작은 숫자가 앞으로)
+    ? : (0번이나 1번 의미)
+    + : (1번 이상 반복)
+    * : (0번 이상 반복)
+    정규표현식 연습장 : https://regexr.com/
+        ex1. 전화번호 패턴 : (\d{2,3}[\-)]?\d{3,4}-\d{4})|\d{9,11}
+        ex2. 이메일 패턴 : [a-z0-9_\.]{3,}@\w+\.\w+)(\.\w+)?
+        ex3. 생년월일 : \d{2}(0[1-9]|1[0-2])(0[1-9]|[1-2]\d|3[01])
+        ex4. 주민번호 : \d{2}(0[1-9]|1[0-2])(0[1-9]|[1-2]\d|3[01])-[1-4]\d{6}
+     -->
+    <form>
+        <fieldset>
+            <legend>필드 유효성 검사</legend>
+            <ul>
+                <li>
+                    <label for="tel">연락처</label>
+                    <input type="text" name="tel" id="tel"
+                           placeholder="전화번호형식(첫화면 도움말)"
+                           required="required"
+                           autofocus="autofocus"
+                           autocomplete="off"
+                           pattern="\d{2,3}-?\d{3,4}-?\d{4}"
+                           title="'전화번호 패턴을 지켜주세요'" />
+                </li>
+                <li>
+                    <label for="email">이메일</label>
+                    <input type="text" name="email" id="email"
+                           placeholder="아이디@도메인"
+                           pattern="[a-z0-9_\.]{3,}@\w+\.\w+(\.\w+)?"
+                           title="이메일 패턴을 지켜주세요" />
+                </li>
+            </ul>
+            <p>
+                <input type="submit" value="입력" />
+                <input type="reset" />
+            </p>
+        </fieldset>
+    </form>
+</body>
+</html>

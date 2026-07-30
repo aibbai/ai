@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<style>
+    span {
+        color: red;
+        font-weight: bold;
+    }
+    h1 {text-align: center;}
+    footer {
+        border-top: 1px solid lightgray;
+    }
+</style>
+<body>
+    <header>
+        <h1>회원가입</h1>
+    </header>
+    <div id="join_content">
+        <form>
+            <table>
+                <filedset>
+                    <legend>필수입력</legend>
+                    <ul>
+                    <tr>
+                        <td>
+                            <label for="name">이름<span>*</span></label>
+                            <input type="text" name="name" id="name"
+                                   placeholder="이름은 2글자 이상"
+                                   required="required"
+                                   autofocus="autofocus"
+                                   autocomplete="off"
+                                   pattern="[가-힣]{2,5}$"
+                                   title="형식에 맞지 않습니다"
+                        </td>
+                    </tr>
+                    <form name="frm" onsubmit="return chk()">
+                        <table>
+                            <tr>
+                                <td><label for="id">아이디<span>*</span></label></td>
+                                <td>
+                                    <input type="text" name="id" id="id" placeholder="ID는 4글자 이상" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label for="pw">비밀번호<span>*</span></label></td>
+                                <td><input type="password" name="pw" id="pw" /></td>
+                            </tr>
+                            <tr>
+                                <td><label for="pwChk">비번확인<span>*</span></label></td>
+                                <td><input type="password" name="pwChk" id="pwChk" /></td>
+                            </tr>
+                        </table>
+                    </form>
+                    <tr>
+                        <td><label for="tel">전화<span>*</span></label> </td>
+                        <td>
+                            <input type="text" name="tel" id="tel"
+                                   required="required"
+                                   autofocus="autofocus"
+                                   autocomplete="off"
+                                   pattern="\d{2,3}-?\d{3,4}-?\d{4}"
+                                   title="'전화번호 패턴을 지켜주세요'" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="email">이메일<span>*</span></label></td>
+                        <td>
+                            <input type="text" name="email" id="email"
+                                   pattern="[a-z0-9_\.]{3,}@\w+\.\w+(\.\w+)?"
+                                   title="이메일 패턴을 지켜주세요" />
+                        </td>
+                    </tr>
+
+                    </ul>
+                </filedset>
+            </table>
+            <filedset>
+                <legend>추가입력사항</legend>
+                <tr>
+                    <td>결혼 유 무</td>
+                    <td>
+                        <input type="radio" name="married" value="y" /> 기혼
+                        <input type="radio" name="married" value="n" /> 미혼
+                    </td>
+                </tr>
+                <tr>
+                    <td>자식</td>
+                    <td>
+                        <input type="checkbox" name="child" value="son" /> 아들
+                        <input type="radio" name="child" value="daughter" /> 딸
+                    </td>
+                </tr>
+                <tr>
+                    <td>지역</td>
+                    <td>
+                        <select name="nation">
+                            <option>경기</option>
+                            <option>서울</option>
+                        </select>
+                    </td>
+                </tr>
+            </filedset>
+        </form>
+    </div>
+    <tr>
+        <th colspan="2">
+            <input type="submit" value="입력" />
+            <input type="reset" value="초기화" />
+        </th>
+    </tr>
+
+    <footer>
+        <p>
+            서울시 관악구 신림로 364, 우장 BD 503호<br />
+            Copyright ⓒ XX All Rights reserved.
+        </p>
+    </footer>
+</body>
+</html>
