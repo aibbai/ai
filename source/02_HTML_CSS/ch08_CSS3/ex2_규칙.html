@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0" />
+    <title></title>
+    <style>
+        @import url('css/title.css');
+        @import url('css/footer.css');
+        @media screen {
+            /* 스크린용 css */
+            #wrap .content{
+                background-color: darkgreen;
+                color: white;
+                padding: 20px;
+                text-align: justify;
+        }
+    }
+    @media print {
+        /*print용 css*/
+        #wrap .content{
+    color: #003300;
+    padding: 20px;
+    text-align: justify;
+       }
+    }
+    </style>
+    <link href="css/title.css" rel="stylesheet">
+    <link href="css/content-pc.css" rel="stylesheet" media="screen">
+    <link href="css/contentp-print.css" rel="stylesheet" media="print">
+    <link href="css/footer.css" rel="stylesheet"
+</head>
+<body>
+    <div id="wrap">
+        <div class="title"><h1>NOTICE</h1></div>
+        <hr>
+        <div class="content">
+            <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since 1966, when designers at Letraset and James Mosley, the librarian at St Bride Printing Library in London, took a 1914 Cicero translation and scrambled it to make dummy text for Letraset's Body Type sheets. It has survived not only many decades, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised thanks to these sheets and more recently with desktop publishing software like Aldus PageMaker and Microsoft Word including versions of Lorem Ipsum.
+            </p>
+        </div>
+        <div class="footer">
+            <p>2025.08.04 <br>Written by Hong Gil-Dong</p>
+        </div>
+    </div>
+</body>
+</html>
