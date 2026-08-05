@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0" />
+    <title></title>
+    <style>
+        p{text-align: center;}
+    </style>
+    <script>
+        function chk(){
+          // 첫번째 수(frm.su1.value)와 두번째 수를 가져와서 몇번째 수가 얼마 더 큰지 alert
+          let su1 = frm.su1.value
+          let su2 = frm.su2.value
+
+          
+          if (su1 == "" || su2 == "") 
+          alert(' 두 수 모두 입력해야함 ')
+          return false;
+
+          if (su1>su2)
+          alert('첫번째 수가'+(su1-su2)+'만큼 더 크다')
+          else if (su2>su1)
+          alert('두번째 수가'+(su2-su1)+'만큼 더 크다')
+          return false;
+
+        }
+    </script>
+</head>
+<body>
+    <form name="frm" onsubmit="return chk()">
+      <fieldset>
+        <p>첫번째 수 : <input type="number" name="su1"></p>
+        <p>두번째 수 : <input type="number" name="su2"></p>
+        <p><input type="submit" value="결과"></p>
+      </fieldset>
+    </form>
+</body>
+</html>
