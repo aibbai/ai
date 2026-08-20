@@ -1,0 +1,48 @@
+-- [IV] DCL, DDL, DML
+/* SQL
+(1) DCL : 사용자 계정 생성 (CREATE USER), 권한부여(GRANT), 권한박탈(REVOKE), 사용자 계정 삭제(DROP USER)
+          트랜잭션명령어(ROLLBACK, COMMIT)
+(2) DDL : 테이블 생성(CREATE TABLE), 테이블구조변경(ALTER TABLE, 테이블삭제(DROP TABLE)
+(2) DML : CRUD
+        입력(INSERT), 수정(UPDATE), 삭제(DELETE) - 취소(ROLLBACK) 가능
+        검색(SELECT)
+*/ 
+----------------
+--- ★ DDL ★ ---
+----------------
+-- 1. 테이블 생성(CREATE TABLE 테이블명...) : 테이블 구조 정의
+    -- ORACLE 타입 : NUMBER(38이하의 자릿수), DATE, CHAR, VARCHAR2(4000이하의 바이트수), CLOB
+CREATE TABLE BOOK(
+    BOOKID     NUMBER(4),    -- BOOKID필드의 타입은 숫자 4자리
+    BOOKNAME   VARCHAR2(30), -- BOOKNAME필드의 타입은 문자30BYTE(한글1자=3BYTE)
+    PUBLISHER  VARCHAR2(30), 
+    RDATE      DATE,         -- RDATE 필드의 타입은 DATE(날짜+시간)
+    PRICE      NUMBER(8,2),  -- PRICE 필드의 타입은 숫자 전체 8자리 중 소수점 2자리
+    PRIMARY KEY(BOOKID)      -- 제약조건 : BOOKID를 주키(PRIMARY KEY)로
+);
+DESC BOOK;
+SELECT * FROM BOOK;
+DROP TABLE BOOK; --2. 테이블 삭제(DROP TABLE 테이블명)
+
+CREATE TABLE BOOK(
+    BOOKID     NUMBER(4) PRIMARY KEY,    -- 제약조건
+    BOOKNAME   VARCHAR2(30), 
+    PUBLISHER  VARCHAR2(30), 
+    RDATE      DATE,        
+    PRICE      NUMBER(8,2)
+);
+DROP TABLE BOOK;
+-- DEPT와 유사한 DEPT01테이블 / EMP와 유사한 EMP01테이블 생성
+
+
+
+
+
+
+
+
+
+
+
+
+
