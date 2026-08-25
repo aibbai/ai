@@ -1,0 +1,135 @@
+-- DCL(계정생성, 권한부여, 권한박탈, 계정삭제)
+-- DDL(타입, 시퀀스없음, FK 지정을 아래에)
+-- DML(outter join, and;&&, or;||, 일부함수)
+
+-- ■■■■■■■■■■■■■■■■
+-- ■■■ ※ DCL ※ ■■■
+-- ■■■■■■■■■■■■■■■■ 
+
+create user userid identified by 'password'; -- 계정 생성
+grant all privileges on *.* to userid; -- 권한 부여
+revoke all on *.* from userid; -- 권한 박탈
+drop user userid; -- 계정 삭제
+-- 데이터 베이스로 들어가기
+show databases; -- 데이터베이스들의 리스트
+create database devdb; -- 새로운 데이터베이스(devdb) 생성
+show databases; 
+use devdb; -- 데이터베이스로 들어감
+use information_schema; 
+show tables; -- 현재 데이터베이스 내의 테이블들
+use devdb;
+show tables; -- 현재 데이터베이스 내의 테이블들
+
+-- ■■■■■■■■■■■■■■■■
+-- ■■■ ※ DDL ※ ■■■
+-- ■■■■■■■■■■■■■■■■ 
+
+/* mySQL 타입 : numeric(n, d), varchar(n), date(날짜만), datetime, timestamp(날짜시간)
+정수 : tinyint(1byte), smallint(2byte), dediumint(3byte), int/integer(4byte), bigint(8byte)
+실수 : float(n, d ; 4byte), double(n, d;8byte)
+문자 : char(n;비추), text, longtext(4GB)
+*/
+drop table if exists friend;
+create table friend(
+	no   int         primary key auto_increment,  -- auto_increment 필드타입은 int
+	name varchar(30) not null, 
+    tel  varchar(30) unique,
+    age  numeric(3) default 1 check (age>=0),
+    last_modify datetime default now()
+);
+select * from friend; 
+insert into friend (name, tel) values ('홍길동', null);
+insert into friend (name, tel, age) values ('성춘향', '010-9999-9999', -2);
+insert into friend (name, tel, age) values ('성춘향', '010-9999-9999', 22);
+
+-- ★ ★ ★ 파이썬 수업시간에 쓸 테이블 ★ ★ ★
+-- DDL과 DML 명령어는 데이터베이스안에서만 실행
+select database(); -- 현재 들어와 있는 데이터베이스
+use devdb;
+drop table if exists person; -- emp 테이블 
+drop table if exists division; -- dept 테이블 유사
+create table division(
+	dno int primary key, 
+    dname varchar(20), 
+    phone varchar(20),
+    position varchar(20)
+);
+create table person(
+	pno   int primary key,
+    pname varchar(15) not null,
+    job   varchar(15) not null,
+    manager int,  -- 상사사번
+    hiredate date, -- 입사일
+    sal      numeric(10),
+    comm  	 numeric(10), 
+    dno      int,
+    foreign key(dno) references division(dno) -- FK 제약조건은 반드시 아래에 따로 명시
+);
+
+-- ■■■■■■■■■■■■■■■■
+-- ■■■ ※ DML ※ ■■■
+-- ■■■■■■■■■■■■■■■■ 
+
+insert into division values (10, 'finance', '02-2088-5679','신림');
+insert into division values (20, 'research', '02-555-4321','강남');
+insert into division values (30, 'sales', '02-717-4321','마포');
+insert into division values (40, 'cs', '031-4444-4321','수원');
+
+insert into person values (1111,'smith','manager', 1001, '1990-12-17', 1000, null, 10);
+insert into person values (1112,'ally','salesman',1116,'1991-02-20',1600,500,30);
+insert into person values (1113,'word','salesman',1116,'1992-02-24',1450,300,30);
+insert into person values (1114,'james','manager',1001,'1990-04-12',3975,null,20);
+insert into person values (1001,'bill','president',null,'1989-01-10',7000,null,10);
+insert into person values (1116,'johnson','manager',1001,'1991-05-01',3550,null,30);
+insert into person values (1118,'martin','analyst',1111,'1991-09-09',3450,null,10);
+insert into person values (1121,'kim','clerk',1114,'1990-12-08',4000,null,20);
+insert into person values (1123,'lee','salesman',1116,'1991-09-23',1200,0,30);
+insert into person values (1226,'park','analyst',1111,'1990-01-03',2500,null,10); 
+
+select * from division;
+select * from person;
+
+-- 1. 사번, 이름, 급여를 출력
+select pno, pname, pno
+	from person;
+    
+-- 2. 급여가 2000~5000 사이 모든 직원의 모든 필드
+select * from person
+	where sal>=2000 && sal<=5000;
+
+-- 3. 부서번호가 10또는 20인 사원의 사번, 이름, 부서번호
+select pno, pname, dno
+	from person
+	where dno=10 or dno=20;
+
+-- 4. 보너스가 null인 사원의 사번, 이름, 급여, 보너스. 급여 큰 순정렬
+select pno, pname, sal, comm
+	from person
+	where comm = null;
+    
+-- 5. 사번, 이름, 부서번호, 급여. 부서코드 순 정렬 같으면 PAY 큰순
+select pno, pname, dno, sal
+	from person
+	order by dno, sal desc;
+    
+-- 6. 사번, 이름, 부서명
+select pno, pname, dname
+	from person p, division d	
+	where p.dno=d.dno;
+    
+-- 7. 사번, 이름, 상사이름
+select w.pno, w.pname, m.pname
+	from person w, person m
+	where w.manager=m.pno;
+    
+-- 8. 사번, 이름, 상사이름(상사가 없는 사람도 출력하되 상사가 없는 경우 ★CEO★로 출력) – oracle과 다른 문법
+
+-- 8-1 사번, 이름, 상사사번(상사가 없으면 ceo로 출력. ifnull함수의 매개변수의 타입이 상이해도 상관없음) – oracle과 다른 문법
+
+-- 9. 이름이 s로 시작하는 사원 이름 (like 이용)
+select pname
+	from person
+		where pname like 's%';
+        
+-- 10. 사번, 이름, 급여, 부서명, 상사이름 – orcale과 다른 문법
+
