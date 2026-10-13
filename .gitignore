@@ -9,3 +9,5 @@ __pycache__/
 IDE/
 .env
 09_Project/
+.vercel/
+
